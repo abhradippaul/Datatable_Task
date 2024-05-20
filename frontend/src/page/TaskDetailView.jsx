@@ -6,7 +6,7 @@ const TaskDetailView = () => {
   const { id } = useParams();
   const [task, setTask] = useState(null);
   const [edit, setEdit] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/${id}`)
@@ -19,7 +19,6 @@ const TaskDetailView = () => {
       .catch((error) => console.error("Error fetching task:", error));
   }, [id]);
 
-  // return task && <TaskFormView createTask={task} />;
   return (
     task &&
     (edit ? (
