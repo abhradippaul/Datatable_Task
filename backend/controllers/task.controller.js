@@ -3,6 +3,7 @@ const taskModel = require("../schema/task.model");
 async function createTask(req, res) {
     try {
         const { title, description, status, dueDate } = req.body;
+
         if (!title || !description || !dueDate) {
             return res.status(400).json({ message: 'Please fill all fields' });
         }
@@ -93,7 +94,7 @@ async function deleteTask(req, res) {
         if (!id) {
             return res.status(400).json({ message: 'Provide the task id' });
         }
-        const task = await taskModel.findByIdAndRemove(id);
+        const task = await taskModel.findByIdAndDelete(id);
         if (!task) {
             return res.status(404).json({ message: 'Error in deleting task' });
         }
