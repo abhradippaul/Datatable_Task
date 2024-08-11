@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { columns } from "./components/Columns";
 import { DataTable } from "./components/DataTable";
 // import { dashboard_data } from "./Data";
+import { Skeleton } from "./components/ui/skeleton";
 
 interface DataValue {
   companyName: string;
@@ -14,6 +15,7 @@ interface DataValue {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<DataValue[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,7 @@ function App() {
           description: `${prev.description},${prev.details}`,
         }));
         setData(updatedDashboardData);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -34,7 +37,13 @@ function App() {
   }, []);
   return (
     <div className="max-w-7xl mx-auto w-[90%]">
-      <DataTable columns={columns} data={data} />
+      {isLoading ? (
+        <div className="border my-10 rounded-lg shadow-xl min-h-[90dvh]">
+          <Skeleton className="w-[60%] h-[15dvh]" />
+        </div>
+      ) : (
+        <DataTable columns={columns} data={data} />
+      )}
     </div>
   );
 }
