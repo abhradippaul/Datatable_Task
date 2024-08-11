@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { columns } from "./components/Columns";
 import { DataTable } from "./components/DataTable";
-import { dashboard_data } from "./Data";
+// import { dashboard_data } from "./Data";
 
 interface DataValue {
   companyName: string;
