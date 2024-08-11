@@ -13,14 +13,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use("/api/tasks", taskRouter)
 
-// dbConnect().then(() => {
-//     app.listen(process.env.PORT || 80, () => {
-//         console.log(`Server is running on port ${process.env.PORT}`)
-//     })
+dbConnect().then(() => {
+    app.listen(process.env.PORT || 80, () => {
+        console.log(`Server is running on port ${process.env.PORT}`)
+    })
 
-// }).catch((err) => {
-//     console.log("Error from database: ", err)
-//     process.exit(1)
-// })
+}).catch((err) => {
+    console.log("Error from database: ", err)
+    process.exit(1)
+})
 
-module.exports.handler = ServerlessHttp(app);
